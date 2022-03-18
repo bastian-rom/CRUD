@@ -1,7 +1,6 @@
 package com.seb.parrolabs.services;
 
 import com.seb.parrolabs.DAO.ProductRepo;
-import com.seb.parrolabs.models.Customer;
 import com.seb.parrolabs.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepo productRepo;
 
     @Override
-    public boolean create(Product product) {
+    public boolean save(Product product) {
         try{
             productRepo.save(product);
         }catch (Exception e){
@@ -34,10 +33,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product delete(Product customer) {
-        Product productInTrash = productRepo.getById(customer.getId());
-        productRepo.deleteById(customer.getId());
-        return productInTrash;
+    public void delete(Integer id) {
+        productRepo.deleteById(id);
     }
 
     @Override
@@ -62,6 +59,11 @@ public class ProductServiceImpl implements ProductService{
             System.out.println("Could not update Product: "+e);
             return false;
         }
+    }
+
+    @Override
+    public Product updateDescription(Integer id, String description) {
+        return productRepo.getById(id).setDescription(description);
     }
 
 }

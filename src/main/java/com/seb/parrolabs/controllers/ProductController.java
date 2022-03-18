@@ -1,6 +1,5 @@
 package com.seb.parrolabs.controllers;
 
-import com.seb.parrolabs.DAO.ProductRepo;
 import com.seb.parrolabs.models.Product;
 import com.seb.parrolabs.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping({"/","/products"})
 public class ProductController {
@@ -38,8 +38,23 @@ public class ProductController {
     }
 
     @PostMapping("/update_by_id/{id}")
-    public boolean updateProductByID(@PathVariable("id")Integer id, Product newProduct, ModelMap model){
+    public boolean updateProductByID(@PathVariable("id")Integer id,@RequestBody Product newProduct, ModelMap model){
         return this.service.update(newProduct,service.searchByID(id).get());
+    }
+
+    @PostMapping("/save")
+    public boolean saveProduct(@RequestBody Product newProduct, ModelMap model){
+        return this.service.save(newProduct);
+    }
+
+    @GetMapping("/description/{id}")
+    public Product updateDescription(@PathVariable("id")Integer id,String description, ModelMap model){
+        return this.service.updateDescription(id,description);
+    }
+    @GetMapping("/delete/{id}")
+    public boolean updateDescription(@PathVariable("id")Integer id, ModelMap model){
+        this.service.delete(id);
+        return !this.service.searchByID(id).isPresent();
     }
 
 }

@@ -18,7 +18,7 @@ public class ShippingAddress {
 
     String streetName;
     Integer streetNumber;
-    String Country;
+    String country;
     String city;
     String state;
     Long zipCode;
