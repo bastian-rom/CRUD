@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    boolean create(Product product);
+    boolean save(Product product);
     public List<Product> read();
-    Product delete(Product product);
+
+    void delete(Integer id);
 
     Optional<Product> searchByID(Integer id);
 
     Product searchByPrice(Double price);
 
     boolean update(Product newProduct, Product oldProduct);
+
+    Product updateDescription(Integer id, String description);
 }

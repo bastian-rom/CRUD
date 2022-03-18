@@ -16,12 +16,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     Integer id;
+    String name;
     String description;
     Double price;
     Double weight;
-    Product(String description, Double price, Double weight){
-        this.description = description;
+    Product(String name, Double price, Double weight){
+        this.name = name;
         this.price = price;
         this.weight = weight;
+    }
+
+    public Product setDescription(String description) {
+        this.description = description;
+        return this;
     }
 }

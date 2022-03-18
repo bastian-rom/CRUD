@@ -10,7 +10,7 @@ public interface CustomerService {
     List<Customer> read();
     boolean update(Customer newCustomer,Customer oldCustomer);
     Customer delete(Customer customer);
-    boolean add(Customer customer);
+    boolean save(Customer customer);
 
     boolean valid(String email);
 
